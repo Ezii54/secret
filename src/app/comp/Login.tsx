@@ -36,12 +36,12 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
     };
 
     return (
-        <>
-            <section className="flex items-center justify-center gap-2 p-2 shadow-inner rounded-xl bg-color-lg shadow-color-xl">
+        <div className="flex flex-col items-center justify-center gap-4 shadow-inner rounded-xl bg-color-lg shadow-color-xl">
+            <section className="flex w-full p-3">
                 <User
                     weight="thin"
                     size={90}
-                    className="border-2 rounded-lg bg-color-md"
+                    className="mr-2 border-2 rounded-lg text-color-accent border-color-accent bg-color-md"
                 />
 
                 <form className="flex flex-col w-full gap-2 font-mono text-black">
@@ -67,28 +67,24 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                         onClick={handleSubmit}
                         className="rounded-md bg-color-accent"
                     >
-                        Login
+                        Sign In
                     </button>
                 </form>
-                <br />
             </section>
-            <br />
-            <div className="text-center">
-                Tap{" "}
-                {
-                    <Link
-                        passHref
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={"https://wa.me/628872979779"}
-                        className="italic underline text-color-green animate-pulse"
-                    >
-                        disini
-                    </Link>
-                }{" "}
-                untuk mendapatkan Nickname & Password yang dibutuhkan
-            </div>
-        </>
+
+            <section className="mb-2">
+                <Link
+                    passHref
+                    target="_blank"
+                    href={
+                        "https://wa.me/628872979779?text=ini%20apa%20akunnya?"
+                    }
+                    className="p-4 text-center text-color-blue"
+                >
+                    Sign Up?
+                </Link>
+            </section>
+        </div>
     );
 };
 

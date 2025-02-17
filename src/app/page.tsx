@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Login from "./comp/Login";
 import Loading from "./comp/Loading";
 import TypeIt from "typeit-react";
+import Link from "next/link";
 
 const page = () => {
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -12,11 +13,23 @@ const page = () => {
         setLoggedIn(true);
     };
 
+    const handleLogout = () => {
+        setLoggedIn(false);
+    };
+
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), 2000);
     }, []);
+
+    const [isConfess, setConfess] = useState(false);
+
+    const handleConfes = () => {
+        setTimeout(() => {
+            setConfess(true);
+        }, 2000);
+    };
 
     return (
         <>
@@ -29,11 +42,15 @@ const page = () => {
                     {isLoading ? (
                         <Loading />
                     ) : (
-                        <section className="">
+                        <section className="flex flex-col gap-4">
                             <div className="p-2 text-sm rounded-lg shadow-inner bg-color-lg shadow-color-xl">
                                 <TypeIt
                                     options={{
                                         speed: 80,
+                                        cursor: false,
+                                        afterComplete: () => {
+                                            handleConfes();
+                                        },
                                     }}
                                     getBeforeInit={(instance) => {
                                         instance
@@ -122,7 +139,7 @@ const page = () => {
                                                 }
                                             )
                                             .type(
-                                                ", Selamat Ulang Tahun sang kekasih.",
+                                                ", Selamat Ulang Tahun sang Kekasih.",
                                                 {
                                                     delay: 1000,
                                                 }
@@ -136,6 +153,28 @@ const page = () => {
                                     }}
                                 />
                             </div>
+
+                            {isConfess ? (
+                                <div className="flex flex-col items-center justify-center gap-2 p-2 text-sm rounded-lg shadow-inner bg-color-lg shadow-color-xl">
+                                    Ingin membalas pesan ini?
+                                    <div className="flex items-center justify-center w-full gap-2">
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-1/2 rounded-md bg-color-red"
+                                        >
+                                            Tidak
+                                        </button>
+                                        <Link
+                                            passHref
+                                            target="_blank"
+                                            href={"https://wa.me/628872979779"}
+                                            className="w-1/2 text-center rounded-md bg-color-green"
+                                        >
+                                            Balas
+                                        </Link>
+                                    </div>
+                                </div>
+                            ) : null}
                         </section>
                     )}
                 </>
